@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Project</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="py-5">
+      <div class="container">
+        <div class="w-75 mx-auto">
+          <h1 class="mb-3">Product Management System</h1>
+          <div class="mb-4">
+            <label for="pname">Product Name</label>
+            <input id="pname" name="pname" type="text" class="form-control" />
+            <span id="errorName" class="text-danger d-none">
+              Please Enter 3-8 Letters start with Capital Letter</span
+            >
+          </div>
+          <div class="mb-4">
+            <label for="pprice">Product Price</label>
+            <input id="pprice" name="pprice" type="text" class="form-control" />
+            <span id="errorPrice" class="text-danger d-none"
+              >Please enter a price between 1000-10000.</span
+            >
+          </div>
+          <div class="mb-4">
+            <label for="pcategory">Product Category</label>
+            <input
+              id="pcategory"
+              name="pcategory"
+              type="text"
+              class="form-control"
+            />
+            <span id="errorCategory" class="text-danger d-none"
+              >Please enter one type ( Mobile, Screen or Watch ).</span
+            >
+          </div>
+          <div class="mb-4">
+            <label for="pname">Product Description</label>
+            <textarea name="pdesc" id="pdesc" class="form-control"></textarea>
+            <span id="errorDesc" class="text-danger d-none"
+              >Please write a description contains letters only max 250
+              letters.</span
+            >
+          </div>
+          <button id="addBtn" class="btn btn-info" onclick="addProduct()">
+            Add Product
+          </button>
+          <button
+            id="editBtn"
+            class="btn btn-outline-primary d-none"
+            onclick="updateProduct()"
+          >
+            Update Product
+          </button>
+        </div>
+        <div class="empty-msg p-2 text-center d-none">
+          <p class="text-primary fs-2">
+            The Cart is empty please add a product.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="w-75 mx-auto">
+          <div class="mb-4">
+            <label for="psearch"><h4>Search</h4></label>
+            <input
+              oninput="searchProduct()"
+              id="psearch"
+              name="psearch"
+              type="text"
+              class="form-control"
+            />
+          </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Index</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Update</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+
+            <tbody id="products"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div
+        class="modal fade"
+        id="myModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <!-- <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1> -->
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div id="body" class="modal-body"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
