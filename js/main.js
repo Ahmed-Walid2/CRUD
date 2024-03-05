@@ -27,11 +27,13 @@ function addProduct() {
     productList.push(product);
     localStorage.setItem("productList", JSON.stringify(productList));
     displayProduct(productList);
-    showMsg("body", `<h5 class="text-primary">The Product has been added</h5>`);
+    // showMsg("body", `<h5 class="text-primary">The Product has been added</h5>`);
+    Swal.fire("The Product has been added");
     emptyMsg();
     clear();
   } else {
-    showMsg("body", `<h5 class="text-danger">Please enter a valid data</h5>`);
+    // showMsg("body", `<h5 class="text-danger">Please enter a valid data</h5>`);
+    Swal.fire("Please enter a valid data");
   }
 }
 
@@ -86,17 +88,19 @@ function updateProduct() {
     displayProduct(productList);
     localStorage.setItem("productList", JSON.stringify(productList));
     clear();
-    document.getElementById(
-      "body"
-    ).innerHTML = `<h5 class="text-success">The product has been edited</h5>`;
-    myModal.show();
+    // document.getElementById(
+    //   "body"
+    // ).innerHTML = `<h5 class="text-success">The product has been edited</h5>`;
+    // myModal.show();
+    Swal.fire("The product has been edited");
   } else {
     document.getElementById("addBtn").classList.add("d-none");
     document.getElementById("editBtn").classList.remove("d-none");
-    document.getElementById(
-      "body"
-    ).innerHTML = `<h5 class="text-danger">Please Enter a valid Data</h5>`;
-    myModal.show();
+    // document.getElementById(
+    //   "body"
+    // ).innerHTML = `<h5 class="text-danger">Please Enter a valid Data</h5>`;
+    // myModal.show();
+    Swal.fire("Please Enter a valid Data");
   }
 }
 
@@ -106,7 +110,8 @@ function deleteProduct(index) {
 
   displayProduct(productList);
   emptyMsg();
-  showMsg("body", `<h5 class="text-danger">The product has been deleted</h5>`);
+  // showMsg("body", `<h5 class="text-danger">The product has been deleted</h5>`);
+  Swal.fire("The product has been deleted");
 }
 
 function searchProduct(term) {
