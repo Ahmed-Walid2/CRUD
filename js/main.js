@@ -27,26 +27,23 @@ function addProduct() {
     productList.push(product);
     localStorage.setItem("productList", JSON.stringify(productList));
     displayProduct(productList);
-    document.getElementById(
-      "body"
-    ).innerHTML = `<h5 class="text-primary">The Product has been added</h5>`;
-    myModal.show();
+    showMsg("body", `<h5 class="text-primary">The Product has been added</h5>`);
     emptyMsg();
     clear();
   } else {
-    document.getElementById(
-      "body"
-    ).innerHTML = `<h5 class="text-danger">Please enter a valid data</h5>`;
-    myModal.show();
+    showMsg("body", `<h5 class="text-danger">Please enter a valid data</h5>`);
   }
 }
 
 function displayProduct(list) {
   var box = "";
+
   for (var i = 0; i < list.length; i++) {
     box += `<tr>
     <td>${i + 1}</td>
-    <td>${list[i].newName ? list[i].newName : list[i].name}</td>
+    <td class="text-capitalize">${
+      list[i].newName ? list[i].newName : list[i].name
+    }</td>
     <td>${list[i].price}</td>
     <td>${list[i].category}</td>
     <td>${list[i].desc}</td>
@@ -105,14 +102,11 @@ function updateProduct() {
 
 function deleteProduct(index) {
   productList.splice(index, 1);
-
   localStorage.setItem("productList", JSON.stringify(productList));
+
   displayProduct(productList);
   emptyMsg();
-  document.getElementById(
-    "body"
-  ).innerHTML = `<h5 class="text-danger">The product has been deleted</h5>`;
-  myModal.show();
+  showMsg("body", `<h5 class="text-danger">The product has been deleted</h5>`);
 }
 
 function searchProduct(term) {
@@ -126,16 +120,15 @@ function searchProduct(term) {
     return;
   }
 
-  for (i = 0; i < productList.length; i++) {
-    if (
-      productList[i].name.toLowerCase().includes(term.toLowerCase()) == true
-    ) {
+  for (let i = 0; i < productList.length; i++) {
+    if (productList[i].name.toLowerCase().includes(term.toLowerCase())) {
       productList[i].newName = productList[i].name
         .toLowerCase()
         .replace(term, `<span class="text-danger fw-bolder">${term}</span>`);
       matchedProducts.push(productList[i]);
       displayProduct(matchedProducts);
       editSearch = matchedProducts;
+      console.log(editSearch);
     }
   }
 }
@@ -213,4 +206,9 @@ function emptyMsg() {
   } else {
     document.querySelector(".empty-msg").classList.replace("d-block", "d-none");
   }
+}
+
+function showMsg(id, msg) {
+  document.getElementById(id).innerHTML = msg;
+  myModal.show();
 }

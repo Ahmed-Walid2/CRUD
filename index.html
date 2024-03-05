@@ -43,8 +43,8 @@
             <label for="pname">Product Description</label>
             <textarea name="pdesc" id="pdesc" class="form-control"></textarea>
             <span id="errorDesc" class="text-danger d-none"
-              >Please write a description contains letters only max 250
-              letters.</span
+              >Please write a description with minimum 3 letters and maximum 250
+              letters letters.</span
             >
           </div>
           <button id="addBtn" class="btn btn-info" onclick="addProduct()">
@@ -78,7 +78,7 @@
               class="form-control"
             />
           </div>
-          <table class="table table-striped">
+          <table class="table table-striped table-responsive">
             <thead>
               <tr>
                 <th>Index</th>
@@ -90,7 +90,6 @@
                 <th>Delete</th>
               </tr>
             </thead>
-
             <tbody id="products"></tbody>
           </table>
         </div>
@@ -99,7 +98,7 @@
 
     <section>
       <div
-        class="modal fade"
+        class="modal fade min-vh-100 w-100"
         id="myModal"
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
