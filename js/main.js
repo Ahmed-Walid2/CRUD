@@ -26,7 +26,9 @@ function addProduct() {
     };
     productList.push(product);
     localStorage.setItem("productList", JSON.stringify(productList));
+
     displayProduct(productList);
+
     // showMsg("body", `<h5 class="text-primary">The Product has been added</h5>`);
     Swal.fire("The Product has been added");
     emptyMsg();
@@ -41,7 +43,7 @@ function displayProduct(list) {
   var box = "";
 
   for (var i = 0; i < list.length; i++) {
-    box += `<tr>
+    box += `<tr data-id="${list[i].id}">
     <td>${i + 1}</td>
     <td class="text-capitalize">${
       list[i].newName ? list[i].newName : list[i].name
@@ -71,7 +73,6 @@ function editProduct(index) {
   document.getElementById("addBtn").classList.add("d-none");
   document.getElementById("editBtn").classList.remove("d-none");
   rowIndex = index;
-  editFromSearch();
 }
 
 function updateProduct() {
@@ -107,34 +108,29 @@ function updateProduct() {
 function deleteProduct(index) {
   productList.splice(index, 1);
   localStorage.setItem("productList", JSON.stringify(productList));
-
   displayProduct(productList);
+
   emptyMsg();
   // showMsg("body", `<h5 class="text-danger">The product has been deleted</h5>`);
   Swal.fire("The product has been deleted");
 }
 
 function searchProduct(term) {
-  var matchedProducts = [];
-  var term = document.getElementById("psearch").value;
-  if (!term) {
-    for (var i = 0; i < productList.length; i++) {
-      delete productList[i].newName;
-    }
-    displayProduct(productList);
-    return;
-  }
+  var searchBox = "";
 
-  for (let i = 0; i < productList.length; i++) {
+  for (var i = 0; i < productList.length; i++) {
     if (productList[i].name.toLowerCase().includes(term.toLowerCase())) {
-      productList[i].newName = productList[i].name
-        .toLowerCase()
-        .replace(term, `<span class="text-danger fw-bolder">${term}</span>`);
-      matchedProducts.push(productList[i]);
-      displayProduct(matchedProducts);
-      editSearch = matchedProducts;
-      console.log(editSearch);
+      searchBox += `<tr>
+    <td>${i + 1}</td>
+    <td class="text-capitalize">${productList[i].name}</td>
+    <td>${productList[i].price}</td>
+    <td>${productList[i].category}</td>
+    <td>${productList[i].desc}</td>
+    <td><button class="btn btn-success" onClick="editProduct(${i})">Edit</button></td>
+    <td><button class="btn btn-danger" onClick="deleteProduct(${i})">Delete</button></td>
+  </tr>`;
     }
+    document.getElementById("products").innerHTML = searchBox;
   }
 }
 
@@ -198,12 +194,12 @@ function checkDesc() {
   return isValid;
 }
 
-function editFromSearch() {
-  prodName.value = editSearch[rowIndex].name;
-  prodPrice.value = editSearch[rowIndex].price;
-  prodCategory.value = editSearch[rowIndex].category;
-  prodDesc.value = editSearch[rowIndex].desc;
-}
+// function editFromSearch() {
+//   prodName.value = editSearch[rowIndex].name;
+//   prodPrice.value = editSearch[rowIndex].price;
+//   prodCategory.value = editSearch[rowIndex].category;
+//   prodDesc.value = editSearch[rowIndex].desc;
+// }
 
 function emptyMsg() {
   if (productList.length == 0) {
