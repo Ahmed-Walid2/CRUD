@@ -43,7 +43,7 @@ function displayProduct(list) {
   var box = "";
 
   for (var i = 0; i < list.length; i++) {
-    box += `<tr data-id="${list[i].id}">
+    box += `<tr class="overflow-auto">
     <td>${i + 1}</td>
     <td class="text-capitalize">${
       list[i].newName ? list[i].newName : list[i].name
